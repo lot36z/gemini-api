@@ -25,4 +25,10 @@ public class CurrencyService {
     public Currency save(String name, String symbol) {
         return currencyRepository.save(Currency.newCurrency(name, symbol));
     }
+
+    public void delete(Long id) {
+        currencyRepository.findById(id).ifPresent(currency -> {
+            currencyRepository.delete(currency);
+        });
+    }
 }

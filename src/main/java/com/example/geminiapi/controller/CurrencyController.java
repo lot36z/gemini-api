@@ -7,6 +7,7 @@ import com.example.geminiapi.service.CurrencyService;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -32,5 +33,11 @@ public class CurrencyController {
     public ResponseEntity<HttpStatus> save(@RequestBody CurrencyAddRequest request) {
         currencyService.save(request.getName(), request.getSymbol());
         return new ResponseEntity<>(HttpStatus.CREATED);
+    }
+
+    @RequestMapping(value = "/api/currency/{id}", method = RequestMethod.DELETE)
+    public ResponseEntity<HttpStatus> delete(@PathVariable Long id) {
+        currencyService.delete(id);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 }
